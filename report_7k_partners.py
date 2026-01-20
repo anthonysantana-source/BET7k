@@ -12,8 +12,8 @@ from datetime import datetime
 BASE_URL = "https://app.7k.partners/"
 REPORT_PATH_FALLBACK = "/pt/report"  # fallback se o clique no menu falhar
 
-EMAIL = "ronaldhenriquelopes@gmail.com"
-SENHA = "RonaldHL2025#"
+EMAIL = "Pedir acesso ao gestor"
+SENHA = "Pedir acesso ao gestor#"
 
 HEADLESS = False
 
