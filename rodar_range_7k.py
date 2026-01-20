@@ -3,7 +3,7 @@ import time
 import report_7k_partners as R
 
 # ✅ Use DD/MM/YYYY (igual o site)
-PERIODO_INICIO = "01/12/2025"
+PERIODO_INICIO = "18/01/2026"
 PERIODO_FIM = "19/01/2026"
 INTERVALO_ESPERA = 10  # segundos
 

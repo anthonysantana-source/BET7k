@@ -18,7 +18,7 @@ SENHA = "RonaldHL2025#"
 HEADLESS = False
 
 # Período (DD/MM/YYYY)
-DATA_INICIO = "01/12/2025"
+DATA_INICIO = "18/01/2026"
 DATA_FIM = "19/01/2026"
 
 # ✅ Colunas na ORDEM EXATA solicitada (Time fica em A para data no Sheets)
@@ -150,6 +150,14 @@ def parse_number(value: str):
         return None
 
 
+def sheet_date_serial(ts: pd.Timestamp | datetime | None):
+    """Converte datetime -> serial number do Google Sheets (dias desde 1899-12-30)."""
+    if ts is None or pd.isna(ts):
+        return None
+    base = pd.Timestamp("1899-12-30")
+    return int((pd.Timestamp(ts).normalize() - base).days)
+
+
 # ==============================
 # Google Sheets
 # ==============================
@@ -216,130 +224,129 @@ def ensure_time_format_in_sheet(sheet_id: str, tab_name: str, pattern: str = "dd
     ).execute()
 
 
-def read_sheet_as_df(sheet_id: str, tab_name: str) -> pd.DataFrame:
+def ensure_header(sheet_id: str, tab_name: str):
+    """Garante que a linha 1 é exatamente o COLUNAS_ALVO."""
     service = sheets_service()
     resp = service.spreadsheets().values().get(
         spreadsheetId=sheet_id,
-        range=quoted_tab_range(tab_name, "A:Z"),
+        range=quoted_tab_range(tab_name, "A1:Z1"),
+    ).execute()
+    values = resp.get("values", [])
+    current = values[0] if values else []
+
+    if current[:len(COLUNAS_ALVO)] != COLUNAS_ALVO:
+        service.spreadsheets().values().update(
+            spreadsheetId=sheet_id,
+            range=quoted_tab_range(tab_name, "A1"),
+            valueInputOption="RAW",
+            body={"values": [COLUNAS_ALVO]},
+        ).execute()
+
+
+def get_time_to_row_map(sheet_id: str, tab_name: str) -> dict[str, int]:
+    """
+    Lê a coluna A (Time) e devolve { 'YYYY-MM-DD': row_number }.
+    row_number é 1-based no Sheets (A1 é row 1).
+    """
+    service = sheets_service()
+    resp = service.spreadsheets().values().get(
+        spreadsheetId=sheet_id,
+        range=quoted_tab_range(tab_name, "A2:A"),
     ).execute()
 
     values = resp.get("values", [])
-    if not values:
-        return pd.DataFrame()
+    mapping = {}
+    for i, row in enumerate(values, start=2):
+        v = row[0] if row else ""
+        dt = to_datetime_br_or_iso(v)
+        if pd.isna(dt):
+            continue
+        key = pd.Timestamp(dt).strftime("%Y-%m-%d")
+        mapping[key] = i
 
-    header = values[0]
-    rows = values[1:] if len(values) > 1 else []
-    df = pd.DataFrame(rows, columns=header)
+    return mapping
 
-    # ✅ garante colunas e ordem CERTA
+
+def upsert_sheet_by_time(df_new: pd.DataFrame, sheet_id: str, tab_name: str):
+    """
+    ✅ NÃO limpa a planilha inteira.
+    ✅ Atualiza linha existente pela data (Time).
+    ✅ Se não existir, apenda no final.
+    Mantém somente COLUNAS_ALVO na ordem.
+    """
+    service = sheets_service()
+
+    ensure_header(sheet_id, tab_name)
+    ensure_time_format_in_sheet(sheet_id, tab_name, pattern="dd/MM/yyyy")
+
+    # normaliza df
+    df = df_new.copy()
     for c in COLUNAS_ALVO:
         if c not in df.columns:
             df[c] = None
     df = df[COLUNAS_ALVO].copy()
-
-    # ✅ normaliza Time
     df = normalize_time_column(df, "Time")
 
-    # ✅ converte numéricos do Sheets para float/int sem “quebrar coluna”
-    numeric_cols = [c for c in COLUNAS_ALVO if c != "Time"]
-    for c in numeric_cols:
-        df[c] = df[c].apply(parse_number)
+    # mapa de linhas existentes
+    time_to_row = get_time_to_row_map(sheet_id, tab_name)
 
-    # Inteiros “naturais”
-    int_cols = ["Registrations", "FTDs", "QFTDs, CPA"]
-    for c in int_cols:
-        if c in df.columns:
-            df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0).astype(int)
+    # pega último row com dados (para append)
+    last_row = 1
+    if time_to_row:
+        last_row = max(time_to_row.values())
 
-    return df
+    # ordena o df (para append ficar “dia após dia”)
+    df["_sort"] = df["Time"]
+    df = df.sort_values("_sort", ascending=True).drop(columns=["_sort"])
 
+    updates = []
+    appends = []
 
-def _safe_values_for_sheets(df: pd.DataFrame):
-    out = []
-    for row in df.itertuples(index=False, name=None):
-        new_row = []
-        for v in row:
-            if v is None:
-                new_row.append("")
-            elif isinstance(v, float) and pd.isna(v):
-                new_row.append("")
-            elif isinstance(v, (pd.Timestamp, datetime)) and pd.isna(v):
-                new_row.append("")
-            else:
-                new_row.append(v)
-        out.append(new_row)
-    return out
+    for _, r in df.iterrows():
+        dt = r["Time"]
+        if pd.isna(dt):
+            continue
 
+        key = pd.Timestamp(dt).strftime("%Y-%m-%d")
+        serial = sheet_date_serial(dt)
 
-def clear_and_write_sheet(sheet_id: str, tab_name: str, df: pd.DataFrame):
-    service = sheets_service()
+        row_values = [
+            serial,
+            int(r["Registrations"]) if pd.notna(r["Registrations"]) else 0,
+            int(r["FTDs"]) if pd.notna(r["FTDs"]) else 0,
+            int(r["QFTDs, CPA"]) if pd.notna(r["QFTDs, CPA"]) else 0,
+            float(r["FTDs Amount"]) if pd.notna(r["FTDs Amount"]) else 0.0,
+            float(r["Deposits Amount"]) if pd.notna(r["Deposits Amount"]) else 0.0,
+            float(r["RevShare"]) if pd.notna(r["RevShare"]) else 0.0,
+            float(r["CPA"]) if pd.notna(r["CPA"]) else 0.0,
+        ]
 
-    # limpa tudo
-    service.spreadsheets().values().clear(
-        spreadsheetId=sheet_id,
-        range=quoted_tab_range(tab_name, "A:Z"),
-        body={},
-    ).execute()
+        if key in time_to_row:
+            row_num = time_to_row[key]
+            rng = quoted_tab_range(tab_name, f"A{row_num}:H{row_num}")
+            updates.append({"range": rng, "values": [row_values]})
+        else:
+            appends.append(row_values)
 
-    df2 = df.copy()
+    # faz updates em batch
+    if updates:
+        service.spreadsheets().values().batchUpdate(
+            spreadsheetId=sheet_id,
+            body={"valueInputOption": "USER_ENTERED", "data": updates},
+        ).execute()
 
-    # ✅ garante colunas e ordem CERTA ANTES de escrever
-    for c in COLUNAS_ALVO:
-        if c not in df2.columns:
-            df2[c] = None
-    df2 = df2[COLUNAS_ALVO].copy()
+    # append no final (depois do last_row)
+    if appends:
+        # append natural no fim da tabela
+        service.spreadsheets().values().append(
+            spreadsheetId=sheet_id,
+            range=quoted_tab_range(tab_name, "A1"),
+            valueInputOption="USER_ENTERED",
+            insertDataOption="INSERT_ROWS",
+            body={"values": appends},
+        ).execute()
 
-    # ✅ garante Time como datetime
-    df2 = normalize_time_column(df2, "Time")
-
-    # ✅ converter Time em serial do Sheets
-    if "Time" in df2.columns:
-        base = pd.Timestamp("1899-12-30")
-        serial = (df2["Time"] - base).dt.days
-        df2["Time"] = serial.where(df2["Time"].notna(), None)
-
-    values = [df2.columns.tolist()] + _safe_values_for_sheets(df2)
-
-    service.spreadsheets().values().update(
-        spreadsheetId=sheet_id,
-        range=quoted_tab_range(tab_name, "A1"),
-        valueInputOption="USER_ENTERED",
-        body={"values": values},
-    ).execute()
-
-    ensure_time_format_in_sheet(sheet_id, tab_name, pattern="dd/MM/yyyy")
-
-
-def write_sheet_sorted_dedup(df_new: pd.DataFrame, sheet_id: str, tab_name: str):
-    df_old = read_sheet_as_df(sheet_id, tab_name)
-
-    # garante colunas e ordem CERTA no novo também
-    for c in COLUNAS_ALVO:
-        if c not in df_new.columns:
-            df_new[c] = None
-    df_new = df_new[COLUNAS_ALVO].copy()
-
-    if df_old is None or df_old.empty:
-        combined = df_new.copy()
-    else:
-        for c in COLUNAS_ALVO:
-            if c not in df_old.columns:
-                df_old[c] = None
-        df_old = df_old[COLUNAS_ALVO].copy()
-        combined = pd.concat([df_old, df_new], ignore_index=True)
-
-    combined = normalize_time_column(combined, "Time")
-
-    if "Time" in combined.columns:
-        combined["_TimeSort"] = combined["Time"]
-        combined = combined.drop_duplicates(subset=["Time"], keep="last")
-        combined = combined.sort_values("_TimeSort", ascending=True).drop(columns=["_TimeSort"])
-
-    # garante ordem final
-    combined = combined[COLUNAS_ALVO].copy()
-
-    clear_and_write_sheet(sheet_id, tab_name, combined)
-    print("✅ Sheets atualizado: deduplicado e ordenado por data (dia após dia).")
+    print("✅ Sheets atualizado por UPSERT (sem recriar a planilha inteira).")
 
 
 # ==============================
@@ -682,10 +689,10 @@ def capturar_report_7k():
             browser.close()
             return df
 
-        # ✅ normaliza Time como datetime (ordenação/dedup confiável)
+        # ✅ normaliza Time como datetime
         df = normalize_time_column(df, "Time")
 
-        # ✅ Converte numéricos SEM mexer na coluna errada (cada coluna trata seu próprio valor)
+        # ✅ Converte numéricos por coluna
         numeric_cols = [c for c in COLUNAS_ALVO if c != "Time"]
         for c in numeric_cols:
             df[c] = df[c].apply(parse_number)
@@ -697,13 +704,13 @@ def capturar_report_7k():
             if c in df.columns:
                 df[c] = df[c].fillna(0).astype(int)
 
-        # ✅ garante ordem FINAL exatamente como COLUNAS_ALVO
+        # ✅ garante somente as colunas do script e na ordem
         for c in COLUNAS_ALVO:
             if c not in df.columns:
                 df[c] = None
         df = df[COLUNAS_ALVO].copy()
 
-        # ✅ dedup e ordena por data (Time datetime)
+        # dedup dentro do lote (se vier duplicado do site)
         df["_TimeSort"] = df["Time"]
         df = df.drop_duplicates(subset=["Time"], keep="last").sort_values("_TimeSort", ascending=True).drop(columns=["_TimeSort"])
 
@@ -720,8 +727,8 @@ def capturar_report_7k():
             "rows": int(len(df)),
         })
 
-        # ✅ escreve no Sheets respeitando a ordem e com Time como data real
-        write_sheet_sorted_dedup(df, SHEET_ID, SHEET_TAB)
+        # ✅ UPSERT (não bug-a visualização / não recria tudo)
+        upsert_sheet_by_time(df, SHEET_ID, SHEET_TAB)
 
         context.close()
         browser.close()
