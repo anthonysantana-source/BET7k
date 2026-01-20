@@ -1,0 +1,511 @@
+{
+  "meta": {
+    "start": "01/12/2025",
+    "end": "19/01/2026",
+    "url": "https://app.7k.partners/pt/report",
+    "ts": "2026-01-19T19:52:58.410180",
+    "rows": 50
+  },
+  "rows": [
+    {
+      "Time": "2025-12-01",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 1,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 4828.56,
+      "RevShare": 561.03,
+      "CPA": 36.05
+    },
+    {
+      "Time": "2025-12-02",
+      "Registrations": 3,
+      "FTDs": 1,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 5.33,
+      "Deposits Amount": 6663.02,
+      "RevShare": 645.32,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-03",
+      "Registrations": 1,
+      "FTDs": 1,
+      "QFTDs, CPA": 1,
+      "FTDs Amount": 10.65,
+      "Deposits Amount": 4691.62,
+      "RevShare": 790.1,
+      "CPA": 36.05
+    },
+    {
+      "Time": "2025-12-04",
+      "Registrations": 1,
+      "FTDs": 1,
+      "QFTDs, CPA": 2,
+      "FTDs Amount": 5.32,
+      "Deposits Amount": 3936.42,
+      "RevShare": 845.68,
+      "CPA": 72.1
+    },
+    {
+      "Time": "2025-12-05",
+      "Registrations": 1,
+      "FTDs": 1,
+      "QFTDs, CPA": 2,
+      "FTDs Amount": 5.29,
+      "Deposits Amount": 5880.26,
+      "RevShare": -708.72,
+      "CPA": 72.1
+    },
+    {
+      "Time": "2025-12-06",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 5903.0,
+      "RevShare": 833.51,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-07",
+      "Registrations": 1,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 4511.04,
+      "RevShare": 349.52,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-08",
+      "Registrations": 2,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 4397.45,
+      "RevShare": 339.01,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-09",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 3977.66,
+      "RevShare": 270.27,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-10",
+      "Registrations": 1,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 5093.32,
+      "RevShare": -126.31,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-11",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 2114.86,
+      "RevShare": 133.83,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-12",
+      "Registrations": 1,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 3549.23,
+      "RevShare": 237.01,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-13",
+      "Registrations": 1,
+      "FTDs": 0,
+      "QFTDs, CPA": 1,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 4958.09,
+      "RevShare": 528.64,
+      "CPA": 36.05
+    },
+    {
+      "Time": "2025-12-14",
+      "Registrations": 1,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 3523.79,
+      "RevShare": 405.62,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-15",
+      "Registrations": 1,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 3421.3,
+      "RevShare": 210.51,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-16",
+      "Registrations": 1,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 3411.23,
+      "RevShare": 499.34,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-17",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 2821.18,
+      "RevShare": -225.45,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-18",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 3144.44,
+      "RevShare": 532.01,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-19",
+      "Registrations": 2,
+      "FTDs": 1,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 5.58,
+      "Deposits Amount": 4223.7,
+      "RevShare": 440.09,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-20",
+      "Registrations": 1,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 5101.83,
+      "RevShare": 588.49,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-21",
+      "Registrations": 1,
+      "FTDs": 1,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 6.7,
+      "Deposits Amount": 3514.14,
+      "RevShare": 116.72,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-22",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 2765.15,
+      "RevShare": 298.95,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-23",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 1,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 3797.69,
+      "RevShare": 401.34,
+      "CPA": 36.05
+    },
+    {
+      "Time": "2025-12-24",
+      "Registrations": 0,
+      "FTDs": 1,
+      "QFTDs, CPA": 1,
+      "FTDs Amount": 5.68,
+      "Deposits Amount": 3971.69,
+      "RevShare": 583.82,
+      "CPA": 36.05
+    },
+    {
+      "Time": "2025-12-25",
+      "Registrations": 2,
+      "FTDs": 2,
+      "QFTDs, CPA": 2,
+      "FTDs Amount": 67.35,
+      "Deposits Amount": 4151.21,
+      "RevShare": 283.73,
+      "CPA": 72.1
+    },
+    {
+      "Time": "2025-12-26",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 2868.58,
+      "RevShare": -268.62,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-27",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 2370.93,
+      "RevShare": 450.44,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-28",
+      "Registrations": 1,
+      "FTDs": 1,
+      "QFTDs, CPA": 1,
+      "FTDs Amount": 5.6,
+      "Deposits Amount": 3064.53,
+      "RevShare": -168.42,
+      "CPA": 36.05
+    },
+    {
+      "Time": "2025-12-29",
+      "Registrations": 1,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 5904.94,
+      "RevShare": 629.47,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-30",
+      "Registrations": 2,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 7168.58,
+      "RevShare": 777.77,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2025-12-31",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 6903.01,
+      "RevShare": 235.46,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-01",
+      "Registrations": 1,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 7046.43,
+      "RevShare": 167.72,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-02",
+      "Registrations": 0,
+      "FTDs": 1,
+      "QFTDs, CPA": 1,
+      "FTDs Amount": 5.52,
+      "Deposits Amount": 6305.24,
+      "RevShare": 1072.29,
+      "CPA": 36.05
+    },
+    {
+      "Time": "2026-01-03",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 4136.92,
+      "RevShare": 147.87,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-04",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 4555.18,
+      "RevShare": 756.49,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-05",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 5730.74,
+      "RevShare": 966.29,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-06",
+      "Registrations": 1,
+      "FTDs": 1,
+      "QFTDs, CPA": 1,
+      "FTDs Amount": 5.55,
+      "Deposits Amount": 3469.24,
+      "RevShare": 554.27,
+      "CPA": 36.05
+    },
+    {
+      "Time": "2026-01-07",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 3667.11,
+      "RevShare": 682.84,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-08",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 2153.46,
+      "RevShare": 189.56,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-09",
+      "Registrations": 2,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 5154.9,
+      "RevShare": 966.29,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-10",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 3236.23,
+      "RevShare": 143.07,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-11",
+      "Registrations": 1,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 3816.55,
+      "RevShare": 540.03,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-12",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 2534.76,
+      "RevShare": 383.41,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-13",
+      "Registrations": 0,
+      "FTDs": 1,
+      "QFTDs, CPA": 1,
+      "FTDs Amount": 5.58,
+      "Deposits Amount": 3467.33,
+      "RevShare": 460.78,
+      "CPA": 36.05
+    },
+    {
+      "Time": "2026-01-14",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 2106.4,
+      "RevShare": 349.73,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-15",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 4142.0,
+      "RevShare": 138.25,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-16",
+      "Registrations": 1,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 4197.35,
+      "RevShare": 561.46,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-17",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 2841.94,
+      "RevShare": -486.05,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-18",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 3351.69,
+      "RevShare": 244.06,
+      "CPA": 0.0
+    },
+    {
+      "Time": "2026-01-19",
+      "Registrations": 0,
+      "FTDs": 0,
+      "QFTDs, CPA": 0,
+      "FTDs Amount": 0.0,
+      "Deposits Amount": 1582.54,
+      "RevShare": -1295.43,
+      "CPA": 0.0
+    }
+  ]
+}
