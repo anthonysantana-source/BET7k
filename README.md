@@ -15,6 +15,16 @@ O projeto foi estruturado com foco em **clareza, modularidade, segurança e manu
 
 ---
 
+##  Tecnologias
+
+- **Python 3.10+** (recomendado)
+- **Playwright** (automação web)
+- **Pandas** (tratamento dos dados)
+- **Google Sheets API** (envio para planilha)
+- **Google Auth** (Service Account)
+
+---
+
 ## Escopo do Pipeline
 
 O pipeline do BET7K é responsável por:
